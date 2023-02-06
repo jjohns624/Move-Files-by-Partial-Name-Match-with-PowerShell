@@ -1,0 +1,49 @@
+$srcRoot = "C:\\Users\\joshj\\Downloads\\Data"
+$dstRoot = "C:\\Users\\joshj\\Downloads\\Data"
+# Map to destination subdirectory based on first 5 chars of file name
+# NEEDS TO BE 5 CHARACTERS ON LEFT 
+#PROGRAM EXPLANATION:The program will grab any files that start with "Harlo" from the source folder "Data" and send them to the destination folder "Data" and create a destination folder named "Harlow"(Example: Harlo files will be transferred to the Harlow folder)
+$map = @{
+    Harlo = "Harlow"
+    Mahes = "Mahesh"
+    Motel = "Motel 6"
+    Param = "Param Hotel"
+    Peppe = "Peppertree"
+    Rose = "Rose Garden"
+    Salem = "Salem"
+    Seasi = "Seaside"
+    Siest = "Siesta"
+    Tacom = "Tacoma"
+    Trave = "Travelodge"
+}
+
+$fileList = Get-ChildItem -Path $srcRoot -File -Force -Recurse
+foreach ($file in $fileList)
+{
+    $key = if($file.BaseName -match ($map.Keys -join '|'))
+        {
+            $Matches[0]
+        } else {
+            $null
+        }
+
+    if ($key -in $map.Keys)
+    {
+        $fileName = $file.Name
+        $dstDir = Join-Path -Path $dstRoot -ChildPath $map[$key]
+        # Create destination directory if needed
+        if (-not (Test-Path -Path $dstDir))
+        {
+            mkdir -Path $dstDir
+        }
+        Write-Verbose "Moving $($file.FullName)"
+        if (Test-Path -Path (Join-Path -Path $dstDir -ChildPath $fileName))
+        {
+            # Error message if file already exists at destination
+            Write-Error -Message "File $fileName already exists at $dstDir"
+        } else {
+            # OK to move file
+            Move-Item -Path $($file.FullName) -Destination $dstDir
+        }
+    }
+}

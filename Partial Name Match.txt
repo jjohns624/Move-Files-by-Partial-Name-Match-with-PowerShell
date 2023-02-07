@@ -3,6 +3,7 @@ $dstRoot = "C:\\Users\\joshj\\Downloads\\Data"
 # Map to destination subdirectory based on first 5 chars of file name
 # NEEDS TO BE 5 CHARACTERS ON LEFT 
 #PROGRAM EXPLANATION:The program will grab any files that start with "Harlo" from the source folder "Data" and send them to the destination folder "Data" and create a destination folder named "Harlow"(Example: Harlo files will be transferred to the Harlow folder)
+
 $map = @{
     Harlo = "Harlow"
     Mahes = "Mahesh"

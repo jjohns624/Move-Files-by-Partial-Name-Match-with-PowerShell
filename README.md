@@ -1,13 +1,1 @@
-This is a PowerShell script that moves files containing the word "Harlo" from a source folder called "Data" to a destination folder named "Harlow". To modify the search term or destination folder name, simply change the value of the $map variable. Here are the steps of the script:
-
-Set the source root directory path to "your source directory path".
-Set the destination root directory path to "your destination directory path".
-Create a hashtable named "map" that maps the first 5 characters of the file name to the corresponding destination folder name (in this case, "Harlow").
-Get a list of all files in the source root directory and its subdirectories using the Get-ChildItem cmdlet.
-Loop through each file in the file list.
-
-Get the first 5 characters of the file's base name, check if it is in the "map" hashtable keys, and store the corresponding value as the key.
-If the key is found in the hashtable, create the destination folder path by combining the destination root directory path with the value of the key in the hashtable.
-Check if the destination folder exists, and create it if it doesn't.
-Move the file to the destination folder. If the destination file already exists, the script throws an error message.
-The script uses several PowerShell cmdlets such as Get-ChildItem, Join-Path, Test-Path, mkdir, Write-Verbose, Write-Error, and Move-Item.
+This program takes files that have a specific name (like "Harlo") from a folder called "Data" on the computer, and puts them into a new folder called "Harlow" on the same computer. It does this by using a special list (called a "map") that matches the first five letters of a file name with the correct new folder name. It also checks if the new folder already exists and creates it if it doesn't. Finally, it moves the files from the "Data" folder to the correct new folder. If there's already a file with the same name in the new folder, it doesn't move the file and gives an error message.
